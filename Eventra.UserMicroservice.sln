@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventra.UserMicroservice.API", "Eventra.UserMicroservice.API\Eventra.UserMicroservice.API.csproj", "{7BDEAA94-817B-409E-B49D-80B28F51C914}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventra.UserMicroservice.Domain", "Eventra.UserMicroservice.Domain\Eventra.UserMicroservice.Domain.csproj", "{3E794D26-1DC8-49BA-8E36-9DBD1FBB220F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventra.UserMicroservice.Infrastructure", "Eventra.UserMicroservice.Infrastructure\Eventra.UserMicroservice.Infrastructure.csproj", "{CE931CBA-2D63-4464-8533-40900C6AA02E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventra.UserMicroservice.Application", "Eventra.UserMicroservice.Application\Eventra.UserMicroservice.Application.csproj", "{E7A30B3A-53ED-4455-9149-B05DE0A9757C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7BDEAA94-817B-409E-B49D-80B28F51C914}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BDEAA94-817B-409E-B49D-80B28F51C914}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BDEAA94-817B-409E-B49D-80B28F51C914}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BDEAA94-817B-409E-B49D-80B28F51C914}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E794D26-1DC8-49BA-8E36-9DBD1FBB220F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E794D26-1DC8-49BA-8E36-9DBD1FBB220F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E794D26-1DC8-49BA-8E36-9DBD1FBB220F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E794D26-1DC8-49BA-8E36-9DBD1FBB220F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE931CBA-2D63-4464-8533-40900C6AA02E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE931CBA-2D63-4464-8533-40900C6AA02E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE931CBA-2D63-4464-8533-40900C6AA02E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE931CBA-2D63-4464-8533-40900C6AA02E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7A30B3A-53ED-4455-9149-B05DE0A9757C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7A30B3A-53ED-4455-9149-B05DE0A9757C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7A30B3A-53ED-4455-9149-B05DE0A9757C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7A30B3A-53ED-4455-9149-B05DE0A9757C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FEDFF2A6-C9AA-4436-B04B-28A5ECFF3849}
+	EndGlobalSection
+EndGlobal
