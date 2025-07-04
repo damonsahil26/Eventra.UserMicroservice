@@ -1,4 +1,8 @@
+using Eventra.UserMicroservice.Application.Services;
+using Eventra.UserMicroservice.Application.Services.Interfaces;
 using Eventra.UserMicroservice.Infrastructure.Persistance;
+using Eventra.UserMicroservice.Infrastructure.Repositories;
+using Eventra.UserMicroservice.Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +18,11 @@ options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection"),
     sql => sql.MigrationsAssembly("Eventra.UserMicroservice.Infrastructure"))
 );
+
+#region Services
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+#endregion
 
 var app = builder.Build();
 

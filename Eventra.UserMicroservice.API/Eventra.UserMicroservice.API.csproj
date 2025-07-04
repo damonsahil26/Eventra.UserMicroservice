@@ -26,10 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Eventra.UserMicroservice.Application\Eventra.UserMicroservice.Application.csproj" />
     <ProjectReference Include="..\Eventra.UserMicroservice.Infrastructure\Eventra.UserMicroservice.Infrastructure.csproj" />
   </ItemGroup>
