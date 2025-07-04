@@ -9,14 +9,18 @@ namespace Eventra.UserMicroservice.Application.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
-        private readonly PasswordHasher<AppUser> _passwordHasher = new();
 
         public UserService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
 
-        public async Task<bool> RegisterUser(RegisterUser registerUser)
+        public async Task<bool> LoginUser(LoginUserRequest loginUser)
+        {
+            return await _userRepository.LoginUserAsync(loginUser.Email, loginUser.Password);
+        }
+
+        public async Task<bool> RegisterUser(RegisterUserRequest registerUser)
         {
             var user = new AppUser
             {
@@ -31,9 +35,7 @@ namespace Eventra.UserMicroservice.Application.Services
                 UserTypes = registerUser.UserTypes
             };
 
-            user.PasswordHash = _passwordHasher.HashPassword(user, registerUser.Password);
-
-            return await _userRepository.RegisterUser(user);
+            return await _userRepository.RegisterUser(user, registerUser.Password);
         }
     }
 }

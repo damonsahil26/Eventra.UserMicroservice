@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Eventra.UserMicroservice.Application.DTO
 {
-    public class RegisterUser
+    public class RegisterUserRequest
     {
         [Required]
         [Length(1, 50, ErrorMessage = "Length should be between 1 to 50 characters")]
