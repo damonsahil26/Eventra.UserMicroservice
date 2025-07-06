@@ -11,19 +11,27 @@ namespace Eventra.UserMicroservice.Application.Services
     {
         public string GenerateToken(IEnumerable<Claim> claims, TokenOptionsDto tokenOptions)
         {
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenOptions.SecretKey));
+            try
+            {
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenOptions.SecretKey));
 
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var token = new JwtSecurityToken(
-                issuer: tokenOptions.Issuer,
-                audience: tokenOptions.Audience,
-                claims: claims,
-                signingCredentials: creds,
-                expires: DateTime.UtcNow.AddMinutes(tokenOptions.ExpiryMinutes)
-                );
+                var token = new JwtSecurityToken(
+                    issuer: tokenOptions.Issuer,
+                    audience: tokenOptions.Audience,
+                    claims: claims,
+                    signingCredentials: creds,
+                    expires: DateTime.UtcNow.AddMinutes(tokenOptions.ExpiryMinutes)
+                    );
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+                return new JwtSecurityTokenHandler().WriteToken(token);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
         public ClaimsPrincipal? ValidateToken(string token, TokenOptionsDto tokenOptions)

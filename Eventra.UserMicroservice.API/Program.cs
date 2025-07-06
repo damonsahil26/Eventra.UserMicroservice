@@ -3,6 +3,7 @@ using Eventra.UserMicroservice.Application.Services.Interfaces;
 using Eventra.UserMicroservice.Infrastructure.Persistance;
 using Eventra.UserMicroservice.Infrastructure.Repositories;
 using Eventra.UserMicroservice.Infrastructure.Repositories.Interfaces;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,12 +20,29 @@ options.UseSqlServer(
     sql => sql.MigrationsAssembly("Eventra.UserMicroservice.Infrastructure"))
 );
 
+builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+//Connect to MassTrasnit RabbitMQ
+
+builder.Services.AddMassTransit(x =>
+{
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host("localhost", "/", h =>
+        {
+            h.Username("guest");
+            h.Password("guest");
+        });
+    });
+});
+
 #region 
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IEmailTokenService, EmailTokenService>();
+builder.Services.AddScoped<IMessagePublisher, MessagePublisher>();
 
 #endregion
 

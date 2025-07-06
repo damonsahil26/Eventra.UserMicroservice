@@ -18,23 +18,33 @@ namespace Eventra.UserMicroservice.Application.Services
 
         public string GenerateEmailConfirmationToken(Guid userId, string email)
         {
-            var claims = new[]
+            try
             {
+                var claims = new[]
+                  {
                 new Claim(ClaimTypes.Email, email),
                 new Claim("UserId", userId.ToString())
             };
 
-            var tokenOptions = new TokenOptionsDto
+                var section = _config.GetSection("Jwt");
+
+                var tokenOptions = new TokenOptionsDto
+                {
+                    Issuer = section.GetRequiredSection("Issuer").Value ?? string.Empty,
+                    Audience = section.GetRequiredSection("Audience").Value ?? string.Empty,
+                    ExpiryMinutes = Int32.Parse(section.GetRequiredSection("Expiry").Value ?? "10"),
+                    SecretKey = section.GetRequiredSection("Key").Value ?? string.Empty
+                };
+
+                var token = _tokenService.GenerateToken(claims, tokenOptions);
+
+                return token;
+            }
+            catch (Exception ex)
             {
-                Issuer = _config["Jwt.Issuer"] ?? string.Empty,
-                Audience = _config["Jwt.Audience"] ?? string.Empty,
-                ExpiryMinutes = Int32.Parse(_config["Jwt.Expiry"] ?? "10"),
-                SecretKey = _config["Jwt.Key"] ?? string.Empty
-            };
 
-            var token = _tokenService.GenerateToken(claims, tokenOptions);
-
-            return token;
+                return string.Empty;
+            }
         }
     }
 }
