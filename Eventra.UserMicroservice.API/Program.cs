@@ -19,9 +19,13 @@ options.UseSqlServer(
     sql => sql.MigrationsAssembly("Eventra.UserMicroservice.Infrastructure"))
 );
 
-#region Services
+#region 
+
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IEmailTokenService, EmailTokenService>();
+
 #endregion
 
 var app = builder.Build();
