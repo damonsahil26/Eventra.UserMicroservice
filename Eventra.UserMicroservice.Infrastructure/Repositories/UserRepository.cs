@@ -19,6 +19,32 @@ namespace Eventra.UserMicroservice.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
+        public async Task<AppUser> GetUser(Guid userId)
+        {
+            var user = await _dbContext.AppUsers
+                .FirstOrDefaultAsync(x => x.Id == userId);
+
+            if (user == null)
+            {
+                return new();
+            }
+
+            return user;
+        }
+
+        public async Task<AppUser> GetUserWithEmail(string email)
+        {
+            var user = await _dbContext.AppUsers
+                .FirstOrDefaultAsync(x => x.Email == email);
+
+            if (user == null)
+            {
+                return new();
+            }
+
+            return user;
+        }
+
         public async Task<bool> RegisterUser(AppUser user)
         {
             if (user == null)
@@ -38,6 +64,21 @@ namespace Eventra.UserMicroservice.Infrastructure.Repositories
             await _dbContext.AppUsers.AddAsync(user);
             await _dbContext.SaveChangesAsync();
             return true;
+        }
+
+        public async Task UpdateEmailConfirmation(Guid userId)
+        {
+            var user = await GetUser(userId);
+            if (user == null)
+            {
+                return;
+            }
+
+            user.IsEmailConfirmed = true;
+            user.ModifiedDate = DateTime.UtcNow;
+
+            _dbContext.AppUsers.Update(user);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

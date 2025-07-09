@@ -36,13 +36,14 @@ builder.Services.AddMassTransit(x =>
     });
 });
 
-#region 
+#region Services
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IEmailTokenService, EmailTokenService>();
 builder.Services.AddScoped<IMessagePublisher, MessagePublisher>();
+builder.Services.AddScoped<ITokenGenerator, TokenGenerator>();
 
 #endregion
 

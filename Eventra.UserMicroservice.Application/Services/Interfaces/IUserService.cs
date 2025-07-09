@@ -9,6 +9,9 @@ namespace Eventra.UserMicroservice.Application.Services.Interfaces
 {
     public interface IUserService
     {
-        public Task<bool> RegisterUser(RegisterUser registerUser);
+        public Task<bool> RegisterUser(RegisterUserRequest registerUser);
+        public Task<RegisterUserRequest> GetRegisterdUser(Guid userId);
+        public Task UpdateEmailConfirmation(Guid userId);
+        public Task<LoginResponseDto?> LoginUser(LoginUserRequest loginUser);
     }
 }

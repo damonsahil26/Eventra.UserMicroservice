@@ -9,11 +9,15 @@ namespace Eventra.UserMicroservice.Application.Services
     {
         private readonly IConfiguration _config;
         private readonly ITokenService _tokenService;
+        private readonly ITokenGenerator _tokenGenerator;
 
-        public EmailTokenService(IConfiguration config, ITokenService tokenService)
+        public EmailTokenService(IConfiguration config,
+            ITokenService tokenService,
+            ITokenGenerator tokenGenerator)
         {
             _config = config;
             _tokenService = tokenService;
+            _tokenGenerator = tokenGenerator;
         }
 
         public string GenerateEmailConfirmationToken(Guid userId, string email)
@@ -24,25 +28,16 @@ namespace Eventra.UserMicroservice.Application.Services
                   {
                 new Claim(ClaimTypes.Email, email),
                 new Claim("UserId", userId.ToString())
-            };
-
-                var section = _config.GetSection("Jwt");
-
-                var tokenOptions = new TokenOptionsDto
-                {
-                    Issuer = section.GetRequiredSection("Issuer").Value ?? string.Empty,
-                    Audience = section.GetRequiredSection("Audience").Value ?? string.Empty,
-                    ExpiryMinutes = Int32.Parse(section.GetRequiredSection("Expiry").Value ?? "10"),
-                    SecretKey = section.GetRequiredSection("Key").Value ?? string.Empty
                 };
+
+                var tokenOptions = _tokenGenerator.GetTokenOptions();
 
                 var token = _tokenService.GenerateToken(claims, tokenOptions);
 
                 return token;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
                 return string.Empty;
             }
         }
